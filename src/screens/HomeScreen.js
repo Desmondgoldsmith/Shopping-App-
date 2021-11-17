@@ -1,36 +1,50 @@
 import React, {useContext} from 'react'
-import {StyleSheet,Text,View} from 'react-native'
+import {FlatList,StyleSheet,Text,View} from 'react-native'
 import { ProductContext, ProductContextProvider } from '../context/ProductContext'
 import { ActivityIndicator } from 'react-native-paper'
-import { FlatList } from 'react-native-gesture-handler'
+import { AppScreen } from './AppScreen'
+import {AppCard} from '../components/AppCard/AppCard'
 
-const HomeScreen = () =>{
-const {isLoading,products} = useContext(ProductContext)
+
+const HomeScreen = ({navigation}) =>{
+     const {isLoading,products} = useContext(ProductContext)
 
 if(isLoading){
     return(
         <View styles = {styles.prodLoading}> 
-            <ActivityIndicator animating={true} size = "large"/>
-             <Text style={{marginVertical:10,align:"center"}}>Loading Products</Text>
+            <ActivityIndicator animating={true} size = "large" color = "red"  marginTop="50%"/>
+             {/* <Text style={{marginVertical:10}}>Loading Products</Text> */}
         </View>
     )
 }
 // const prods = useContext(ProductContext)
 return(
-    <View>
+    <AppScreen>
 <View>
-    <FlatList data={products} keyExtractor={(item) => item.id} renderItem={({item})=> console.log(item.title)}/>
-</View>
-    </View>
-)
+  {/* <Text>SHOES</Text> */}
+    <FlatList horizontal showsHorizontalScrollIndicator={false}
+              data={products} keyExtractor={(item) => item.id} 
+              renderItem={({item})=>  
+              <AppCard  
+              title={item.title} 
+              price={item.price} 
+              image={item.image}
+              items={item}
+
+              onPress={()=> navigation.navigate("Details",{product:item})}
+              />}/>
+ </View>
+    </AppScreen>
+) 
 }
 export default HomeScreen
 
 const styles = StyleSheet.create({
     prodLoading:{
         flex:1,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center'
+        flexDirection:"row",
+              justifyContent:"center",
+               alignItems:"center",
+ 
     }
 })

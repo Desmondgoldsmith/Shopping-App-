@@ -4,6 +4,8 @@ import HomeScreen from '../screens/HomeScreen'
 import CartScreen from '../screens/CartScreen'
 import UserScreen from '../screens/UserScreen'
 import {AntDesign} from '@expo/vector-icons'
+import { StackNav } from './StackNav'
+// import { AuthNav } from './AuthNav'
 
 const Tab =  createBottomTabNavigator()
 
@@ -21,10 +23,11 @@ export const TabNav =  () =>{
             return <AntDesign name = {iconName} size = {size} color = {color}/>
          }
         })}>
-            <Tab.Screen name = "Home" component = {HomeScreen}/>
+            <Tab.Screen name = "Home" component = {StackNav}/>
             <Tab.Screen name = "Cart" component = {CartScreen}/>
             <Tab.Screen name = "User" component = {UserScreen}/>
 
         </Tab.Navigator>
     )
 }
+export default TabNav

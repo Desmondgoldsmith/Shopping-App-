@@ -1,4 +1,4 @@
-import React,{createContext,useState} from 'react'
+import React,{createContext,useState,useEffect} from 'react'
 import {data} from '../model/ProductModel'
 
 export const ProductContext  = createContext()
@@ -18,3 +18,5 @@ export const ProductContextProvider = ({children}) =>{
         </ProductContext.Provider>
     )
 }
+
+export default ProductContext
